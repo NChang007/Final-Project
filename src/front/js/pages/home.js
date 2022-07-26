@@ -9,6 +9,10 @@ export const Home = () => {
 
 	return (
 		<div>
+			<div className="textUnderNav">
+				<h2 style={{color: 'white'}}>CHECK OUT THE DOG BREEDS</h2>
+			</div>
+			
 			<Card/>
 		</div>
 	);
