@@ -5,14 +5,35 @@ from flask import Flask, request, jsonify, url_for, Blueprint
 from api.models import db, User
 from api.utils import generate_sitemap, APIException
 
+
+from flask_jwt_extended import create_access_token
+from flask_jwt_extended import get_jwt_identity
+from flask_jwt_extended import jwt_required
+
+
 api = Blueprint('api', __name__)
 
+# login Route-----------------------------------------------------------------------------
+@api.route("/login", methods=["POST"])
+def create_token():
+    email = request.json.get("email", None)
+    password = request.json.get("password", None)
 
-@api.route('/hello', methods=['POST', 'GET'])
-def handle_hello():
+    # get user from db
+    # user = Users.query.filter_by(email='test')
+    # print(user)
+    # if not user:
+    #     return jsonify({"msg": "user doesn't exist"}), 401
+    # if user['password'] != password:
+    #     return jsonify({"msg": "wrong password"}), 401
 
-    response_body = {
-        "message": "Hello! I'm a message that came from the backend, check the network tab on the google inspector and you will see the GET request"
-    }
+    if email == 'test@test' and password == 'test' :
 
-    return jsonify(response_body), 200
+    #   #get all favorites for user
+    #   favorites = getUserFavorite(1)
+    #   favorites = [favorite.serialize() for favorite in favorites]
+
+      access_token = create_access_token(identity=email)
+      return jsonify(access_token=access_token)
+
+    return jsonify(msg="wrong user")

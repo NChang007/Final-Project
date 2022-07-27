@@ -1,6 +1,13 @@
 /* 
     General Styles used on every website (Don't Repeat Yourself)
 */
+* {
+  font-family: Arial, Helvetica, sans-serif; 
+  margin: 0%;
+  padding: 0%;
+
+}
+
 /* app--------------------------------------------------------- */
 #app {
     background-color: #ffcdd2 ;
@@ -20,11 +27,26 @@
 .card {
     box-shadow: 0px 10px 25px #e57373 ;
 }
-
+/* btn--------------------------------------------------------------------------------------------------------- */
 .btn {
+  background-color: #ff1744 ;
+  border: none;
+}
+.-btn {
     background-color: #ff1744 ;
     border: none;
+    width: 130px;
+    transition: 0.5s;
 }
+.-btn:hover {
+  letter-spacing: 0.15em;
+  background-color: #ff1744 ;
+  transition: 0.5s;
+  /* background: var(--clr); */
+  /* color: var(--clr); */
+  /* box-shadow: 0 0 35px var(--clr) ; */
+}
+
 
 
 /* login --------------------------------------------------------- */
@@ -123,4 +145,23 @@
   }
   .login-form .action button:nth-child(2):hover {
     background: #d50000 ;
+  }
+
+
+  /* profile--------------------------------------------------------------------------------------- */
+  .profileCont {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  }
+  .profileCont > div > a > button {
+    margin: 1rem;
+  }
+  .profileCont > div > h2 {
+    margin: 1rem;
+    font-weight: 700;
+    border-bottom: 1px solid;
   }

@@ -17,11 +17,11 @@ function Card() {
         </div>
         <div style={{margin:'1em'}}>
           <Link to={"/pages/AboutCharacterPage/"}>
-            <span className="btn btn-primary">Learn More</span>
+            <span className="-btn btn btn-primary"><i>Learn More</i></span>
 			</Link>
           <i 
           className="far fa-lg fa-heart favBtn" 
-          style={{margin:'0rem 0rem 0rem 7rem'}}
+          style={{margin:'0rem 0rem 0rem 6rem'}}
         //   onClick={() => actions.handleFavorites(c_id, "char", character.name)}
           ></i>
         </div>
