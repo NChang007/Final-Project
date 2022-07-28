@@ -86,8 +86,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					//error handling
 					console.log(error);
 				  });
-			  },
-
+			},
+			// add user ------------------------------------------------------------------------------------------------------------------
+			
 
 
 			// // Use getActions to call a function within a fuction

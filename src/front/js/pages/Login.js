@@ -42,8 +42,12 @@ const Login = () => {
 					</Link>
         </div>
         <div className="action">
-          <button>Register</button>
+          <Link to="/Register">
+            <button className="regBtn">Register</button>
+					</Link>
+
           <button onClick={(e) => handleClick(e)}>Sign in</button>
+          
         </div>
       </form>
       {store.message && <p>{store.message}</p>}
