@@ -3,6 +3,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			token: null,
 			message: null,
+			breeds: [],
 			
 		},
 		actions: {
@@ -73,13 +74,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 				  .then((response) => response.json())
 				  .then((data) => {
 					console.log(data);
-					for (let i = 0; i < data.data.length; i++) {
+					for (let i = 0; i < data.length; i++) {
 					  // data.data[i].fav = false;
-					  data.data[i].type = "char";
+					  data[i].type = "breed";
 					}
 					// store.planets = data.results;
 					// setStore(store);
-					setStore({ characters: data.data });
+					setStore({ breeds: data });
 				  })
 				  .catch((error) => {
 					//error handling
