@@ -50,6 +50,7 @@ const Login = () => {
           
         </div>
       </form>
+      
       {store.message && <p>{store.message}</p>}
     </div>
   );

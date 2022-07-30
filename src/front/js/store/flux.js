@@ -27,7 +27,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				  headers: {
 					"Content-Type": "application/json",
 					"Access-Control-Allow-Origin": "*",
-					//"Access-Control-Allow-Headers": "Origin",
+					// "Access-Control-Allow-Headers": "Origin",
 					//"X-Requested-With, Content-Type": "Accept",
 				  },
 				  body: JSON.stringify({
@@ -37,7 +37,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				};
 				try {
 				  const resp = await fetch(
-					"https://3001-nchang007-finalproject-vtxwop1yw6i.ws-us54.gitpod.io/api/login",
+					"https://3001-nchang007-finalproject-mcfd2qsormk.ws-us54.gitpod.io/api/login",
 					opts
 				  );
 				  if (resp.status !== 200) {
@@ -88,7 +88,46 @@ const getState = ({ getStore, getActions, setStore }) => {
 				  });
 			},
 			// add user ------------------------------------------------------------------------------------------------------------------
-			
+			createUser: async (Uname, email, password) => {
+				const store = getStore();
+				const opts = {
+					method: "POST",
+					mode: "cors",
+					headers: {
+					  "Content-Type": "application/json",
+					  "Access-Control-Allow-Origin": "*",
+					  // "Access-Control-Allow-Headers": "Origin",
+					  //"X-Requested-With, Content-Type": "Accept",
+					},
+					body: JSON.stringify({
+					  Uname: Uname,
+					  email: email,
+					  password: password,
+					}),
+				};
+				try {
+					const resp = await fetch(
+					  "https://3001-nchang007-finalproject-mcfd2qsormk.ws-us54.gitpod.io/api/createUser",
+					  opts
+					);
+					if (resp.status !== 200) {
+					  alert("there has been an error");
+					  return false;
+					}
+					const data = await resp.json();
+					console.log(data);
+					if (data.msg == "created") {
+						//rederect to login
+						this.props.history.push('/login')
+					  } else {
+						setStore({ message: data.msg });
+					  }
+
+					return true;
+				  } catch (error) {
+					console.error("there was an error", error);
+				  }
+			}
 
 
 			// // Use getActions to call a function within a fuction

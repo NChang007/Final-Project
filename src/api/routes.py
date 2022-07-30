@@ -27,7 +27,7 @@ def create_token():
     # if user['password'] != password:
     #     return jsonify({"msg": "wrong password"}), 401
 
-    if email == 'test@test' and password == 'test' :
+    if email == '123@123' and password == '123' :
 
     #   #get all favorites for user
     #   favorites = getUserFavorite(1)
@@ -44,14 +44,13 @@ def createUser():
   request_body = request.get_json()
   print(request_body)
   user = User(
-        id = request_body["id"],
-        name = request_body["name"],
+        name = request_body["Uname"],
         email = request_body["email"],
         password = request_body["password"],
     )
 
   db.session.add(user)   
   db.session.commit()
-  favorites = getUserFavorite(1)
-  favorites = [favorite.serialize() for user in User]
-  return jsonify(user=user)
+  # favorites = getUserFavorite(1)
+  # favorites = [favorite.serialize() for user in User]
+  return jsonify(msg="created")

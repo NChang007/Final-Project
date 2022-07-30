@@ -7,11 +7,18 @@ import { Link } from "react-router-dom";
 
 function Register() {
     const { store, actions } = useContext(Context);
-    const [name, setName] = useState('');
+    const [Uname, setUname] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const history = useNavigate();
+    
+    const handleClick = (e) => {
+        e.preventDefault();
+        console.log(e.target)
+          actions.createUser(Uname, email, password)
+        }
 
+    
   return (
     <div className="register-form">
         <form>
@@ -19,7 +26,7 @@ function Register() {
 
             <div className="content">
                 <div className="input-field">
-                    <input type={"text"} placeholder={'Name'} value={name} onChange={(e)=> setName(e.target.value)}/>
+                    <input type={"text"} placeholder={'Name'} value={Uname} onChange={(e)=> setUname(e.target.value)}/>
                 </div>
                 <div className="input-field">
                     <input type={"text"} placeholder={'Email'} value={email} onChange={(e)=> setEmail(e.target.value)}/>
@@ -35,7 +42,7 @@ function Register() {
             </div>
 
             <div className="action">
-                <button>Register</button>
+            <button onClick={(e) => handleClick(e)}>Register</button>
             </div>
 
         </form>
