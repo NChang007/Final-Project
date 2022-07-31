@@ -74,3 +74,45 @@ def createUser():
     # favorites = getUserFavorite(1)
     # favorites = [favorite.serialize() for user in User]
     return jsonify({"created": "Thanks. your register was successfully", "status": "true"}), 200
+
+
+
+
+# get all favorites------------------------------------------------------------------------------------------------------
+@api.route('/favorites', methods=['GET'])
+def getUserFavorite(id):
+  favorites = Favorites.query.all()
+  if favorites is None:
+    return "This page does not exist"
+  else:
+    f = []
+    for fav in favorites: 
+      if fav.user_id == id:
+        f.append(fav)
+    return f
+
+#add a fave---------------------------------------------------------------------------------------------------------------
+@api.route('/addfavorites', methods=['POST'])
+def addFavorite():
+  request_body = request.get_json()
+  print(request_body)
+  favorite = Favorites(fave_id = request_body["fave_id"],
+                    name = request_body["name"],
+                    item_type = request_body["item_type"],
+                    user_id = 1)
+
+  db.session.add(favorite)   
+  db.session.commit()
+  favorites = getUserFavorite(1)
+  favorites = [favorite.serialize() for favorite in favorites]
+  return jsonify(favorites=favorites)
+
+# remove favorite----------------------------------------------------------------------------------------------
+@api.route('/deletefav/<int:id>', methods=['DELETE'])
+def removeFav(id):
+  Favorites.query.filter_by(id=id).delete()
+  db.session.commit()
+  # return the updated list
+  favorites = getUserFavorite(1)
+  favorites = [favorite.serialize() for favorite in favorites]
+  return jsonify(favorites=favorites)
