@@ -17,7 +17,7 @@ export const Home = () => {
 		 alignItems: "center",
 		}}>
 			<div className="textUnderNav">
-				<h2 style={{color: 'white'}}>CHECK OUT THE DOG BREEDS</h2>
+				<h2 style={{color: '#616161 '}}>CHECK OUT THE DOG BREEDS</h2>
 			</div>
 			
 			{store.breeds.map((breed, idx) => {

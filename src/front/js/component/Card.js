@@ -16,7 +16,7 @@ function Card({breed, id}) {
             <ul className='card-text'>
                 <li>Height : {breed.dogInfo.height}</li>
                 <li>Weight : {breed.dogInfo.weight}</li>
-                <li>Life Span : {breed.dogInfo.life}</li>
+                {/* <li>Life Span : {breed.dogInfo.life}</li> */}
             </ul>
         </div>
 

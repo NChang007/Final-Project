@@ -9,7 +9,8 @@ from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
-
+from werkzeug.security import generate_password_hash, check_password_hash
+import datetime
 
 api = Blueprint('api', __name__)
 
@@ -19,19 +20,25 @@ def create_token():
     email = request.json.get("email", None)
     password = request.json.get("password", None)
 
-    # get user from db
-    # user = Users.query.filter_by(email='test')
-    # print(user)
-    # if not user:
-    #     return jsonify({"msg": "user doesn't exist"}), 401
-    # if user['password'] != password:
-    #     return jsonify({"msg": "wrong password"}), 401
+    if request.method == 'POST':
+      email = request.json.get("email", None)
+      password = request.json.get("password", None)
 
-    if email == 'test@test' and password == 'test' :
+      if not email:
+          return jsonify({"msg": "Username is required"}), 400
+      if not password:
+          return jsonify({"msg": "Password is required"}), 400
 
-    #   #get all favorites for user
-    #   favorites = getUserFavorite(1)
-    #   favorites = [favorite.serialize() for favorite in favorites]
+      user = User.query.filter_by(email=email).first()
+      if not user:
+          return jsonify({"msg": "Username/Password are incorrect"}), 401
+
+      if not check_password_hash(user.password, password):
+          return jsonify({"msg": "Username/Password are incorrect"}), 401
+
+      # create token
+      expiration = datetime.timedelta(days=3)
+      access_token = create_access_token(identity=user.email, expires_delta=expiration)
 
       access_token = create_access_token(identity=email)
       return jsonify(access_token=access_token)
@@ -41,17 +48,29 @@ def create_token():
 # create user -----------------------------------------------------------------------------------------------------------
 @api.route('/createUser', methods=['POST'])
 def createUser():
-  request_body = request.get_json()
-  print(request_body)
-  user = User(
-        id = request_body["id"],
-        name = request_body["name"],
-        email = request_body["email"],
-        password = request_body["password"],
-    )
+  if request.method == 'POST':
+    request_body = request.get_json()
+    print(request_body)
 
-  db.session.add(user)   
-  db.session.commit()
-  favorites = getUserFavorite(1)
-  favorites = [favorite.serialize() for user in User]
-  return jsonify(user=user)
+    if not request_body["Uname"]:
+      return jsonify({"msg": "Name is required"}), 400
+    if not request_body["email"]:
+      return jsonify({"msg": "Email is required"}), 400
+    if not request_body["password"]:
+      return jsonify({"msg": "Password is required"}), 400
+
+    user = User.query.filter_by(email=request_body["email"]).first()
+    if user:
+      return jsonify({"msg": "Username  already exists"}), 400
+
+    user = User(
+          name = request_body["Uname"],
+          email = request_body["email"],
+          password = generate_password_hash(request_body["password"]),
+      )
+
+    db.session.add(user)   
+    db.session.commit()
+    # favorites = getUserFavorite(1)
+    # favorites = [favorite.serialize() for user in User]
+    return jsonify({"created": "Thanks. your register was successfully", "status": "true"}), 200
