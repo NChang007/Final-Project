@@ -139,7 +139,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					},
 				  };
 				  fetch(
-					"https://3001-nchang007-starwarsblogr-nstabynatpx.ws-us54.gitpod.io/api/favorites",
+					"https://3001-nchang007-finalproject-mcfd2qsormk.ws-us54.gitpod.io/api/favorites",
 					opts
 				  )
 					.then((response) => response.json())
@@ -166,7 +166,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				  };
 				  let f = store.favorites.filter((f) => f.fave_id == idx);
 				  fetch(
-					"https://3001-nchang007-starwarsblogr-nstabynatpx.ws-us54.gitpod.io/api/deletefav/" +
+					"https://3001-nchang007-finalproject-mcfd2qsormk.ws-us54.gitpod.io/api/deletefav/" +
 					  f[0].id,
 					opts
 				  )
@@ -193,7 +193,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				  };
 				  //add the new one
 				  fetch(
-					"https://3001-nchang007-starwarsblogr-nstabynatpx.ws-us54.gitpod.io/api/addfavorites",
+					"https://3001-nchang007-finalproject-mcfd2qsormk.ws-us54.gitpod.io/api/addfavorites",
 					opts
 				  )
 					.then((response) => response.json())

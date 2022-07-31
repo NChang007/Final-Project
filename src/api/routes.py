@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User
+from api.models import db, User, Favorites
 from api.utils import generate_sitemap, APIException
 
 
@@ -80,6 +80,41 @@ def createUser():
 
 # get all favorites------------------------------------------------------------------------------------------------------
 @api.route('/favorites', methods=['GET'])
+def getAllFavorites():
+  # receive the token
+  # get user id through token
+  favorites = getUserFavorite(User.id)
+  favorites = [favorite.serialize() for favorite in favorites]
+  return jsonify(favorites=favorites)
+
+#add a fave---------------------------------------------------------------------------------------------------------------
+@api.route('/addfavorites', methods=['POST'])
+def addFavorite():
+  request_body = request.get_json()
+  print(request_body)
+  favorite = Favorites(
+    fave_id = request_body["fave_id"],
+    name = request_body[{breed.name}],
+    item_type = request_body["item_type"],
+    user_id = request_body["id"]
+  )
+
+  db.session.add(favorite)   
+  db.session.commit()
+  favorites = getUserFavorite({User.id})
+  favorites = [favorite.serialize() for favorite in favorites]
+  return jsonify(favorites=favorites)
+
+# remove fav----------------------------------------------------------------------------------------------------
+@api.route('/deletefav/<int:id>', methods=['DELETE'])
+def removeFav(id):
+  Favorites.query.filter_by(id=id).delete()
+  db.session.commit()
+  # return the updated list
+  favorites = getUserFavorite(1)
+  favorites = [favorite.serialize() for favorite in favorites]
+  return jsonify(favorites=favorites)
+
 def getUserFavorite(id):
   favorites = Favorites.query.all()
   if favorites is None:
@@ -90,29 +125,3 @@ def getUserFavorite(id):
       if fav.user_id == id:
         f.append(fav)
     return f
-
-#add a fave---------------------------------------------------------------------------------------------------------------
-@api.route('/addfavorites', methods=['POST'])
-def addFavorite():
-  request_body = request.get_json()
-  print(request_body)
-  favorite = Favorites(fave_id = request_body["fave_id"],
-                    name = request_body["name"],
-                    item_type = request_body["item_type"],
-                    user_id = 1)
-
-  db.session.add(favorite)   
-  db.session.commit()
-  favorites = getUserFavorite(1)
-  favorites = [favorite.serialize() for favorite in favorites]
-  return jsonify(favorites=favorites)
-
-# remove favorite----------------------------------------------------------------------------------------------
-@api.route('/deletefav/<int:id>', methods=['DELETE'])
-def removeFav(id):
-  Favorites.query.filter_by(id=id).delete()
-  db.session.commit()
-  # return the updated list
-  favorites = getUserFavorite(1)
-  favorites = [favorite.serialize() for favorite in favorites]
-  return jsonify(favorites=favorites)
