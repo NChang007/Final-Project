@@ -20,6 +20,7 @@ const Login = () => {
       e.preventDefault();
       console.log(e.target)
         actions.login(email, password)
+        
       }
 
       if (store.token && store.token != "" && store.token != undefined) history("/profile")

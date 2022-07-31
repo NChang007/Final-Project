@@ -116,9 +116,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 					const data = await resp.json();
 					console.log(data);
-					if (data.msg == "created") {
+					if (data.status == "true") {
 						//rederect to login
-						this.props.history.push('/login')
+						window.location.href ="https://3000-nchang007-finalproject-mcfd2qsormk.ws-us54.gitpod.io/login"
 					  } else {
 						setStore({ message: data.msg });
 					  }
