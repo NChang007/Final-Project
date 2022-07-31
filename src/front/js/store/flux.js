@@ -4,6 +4,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			token: null,
 			message: null,
 			breeds: [],
+			favorites: [],
 			
 		},
 		actions: {
@@ -127,40 +128,84 @@ const getState = ({ getStore, getActions, setStore }) => {
 				  } catch (error) {
 					console.error("there was an error", error);
 				  }
+			},
+			// favorites-----------------------------------------------------------------------------------------------------------------------------------
+			loadFavorites: () => {
+				const store = getStore();
+				if (sessionStorage.getItem("token")) {
+				  const opts = {
+					headers: {
+					  Authorization: "Bearer " + store.token,
+					},
+				  };
+				  fetch(
+					"https://3001-nchang007-starwarsblogr-nstabynatpx.ws-us54.gitpod.io/api/favorites",
+					opts
+				  )
+					.then((response) => response.json())
+					.then((data) => {
+					  setStore({ favorites: data.favorites });
+					})
+					.catch((error) => {
+					  //error handling
+					  console.log(error);
+					});
+				}
+			},
+
+			handleFavorites: (idx, type, name) => {
+				let store = getStore();
+		
+				// if favorite exists - delete
+				if (store.favorites.filter((f) => f.fave_id == idx).length > 0) {
+				  const opts = {
+					method: "DELETE",
+					headers: {
+					  Authorization: "Bearer " + store.token,
+					},
+				  };
+				  let f = store.favorites.filter((f) => f.fave_id == idx);
+				  fetch(
+					"https://3001-nchang007-starwarsblogr-nstabynatpx.ws-us54.gitpod.io/api/deletefav/" +
+					  f[0].id,
+					opts
+				  )
+					.then((response) => response.json())
+					.then((data) => {
+					  setStore({ favorites: data.favorites });
+					})
+					.catch((error) => {
+					  //error handling
+					  console.log(error);
+					});
+				} else {
+				  const opts = {
+					method: "POST",
+					headers: {
+					  Authorization: "Bearer " + store.token,
+					  "Content-Type": "application/json",
+					},
+					body: JSON.stringify({
+					  "fave_id": idx,
+					  "item_type": type,
+					  "name": name,
+					}),
+				  };
+				  //add the new one
+				  fetch(
+					"https://3001-nchang007-starwarsblogr-nstabynatpx.ws-us54.gitpod.io/api/addfavorites",
+					opts
+				  )
+					.then((response) => response.json())
+					.then((data) => {
+					  setStore({ favorites: data.favorites });
+					})
+					.catch((error) => {
+					  //error handling
+					  console.log(error);
+					});
+				}
 			}
-
-
-			// // Use getActions to call a function within a fuction
-			// exampleFunction: () => {
-			// 	getActions().changeColor(0, "green");
-			// },
-
-			// getMessage: async () => {
-			// 	try{
-			// 		// fetching data from the backend
-			// 		const resp = await fetch(process.env.BACKEND_URL + "/api/hello")
-			// 		const data = await resp.json()
-			// 		setStore({ message: data.message })
-			// 		// don't forget to return something, that is how the async resolves
-			// 		return data;
-			// 	}catch(error){
-			// 		console.log("Error loading message from backend", error)
-			// 	}
-			// },
-			// changeColor: (index, color) => {
-			// 	//get the store
-			// 	const store = getStore();
-
-			// 	//we have to loop the entire demo array to look for the respective index
-			// 	//and change its color
-			// 	const demo = store.demo.map((elm, i) => {
-			// 		if (i === index) elm.background = color;
-			// 		return elm;
-			// 	});
-
-			// 	//reset the global store
-			// 	setStore({ demo: demo });
-			// }
 		}
 	};
 };
