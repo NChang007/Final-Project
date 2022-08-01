@@ -12,15 +12,20 @@ function DogInfo() {
     })
     console.log(dog)
   return (
-    <div >
-        <h1>{dog.breedName}</h1>
-        <img src={dog.image} alt={dog.breedName}/>
-        <div className='mx-auto'>
-            <p>Description: {dog.description}</p>
-            <p>Weight: {dog.dogInfo.weight}</p>
-            <p>Height: {dog.dogInfo.height}</p>
-            <p>Life Span: {dog.dogInfo.life}</p>
-            <p>Group: {dog.dogInfo.breedGroup}</p>
+    <div className='container'>
+        <div className='dogInfoContainer'>
+           <div className='title'><h1>{dog.breedName}</h1></div> 
+            <div className='infoContainerImage'>
+            <img src={dog.image} alt={dog.breedName}/>
+                <div className='mx-auto'>                  
+                    <p>Weight: {dog.dogInfo.weight}</p>
+                    <p>Height: {dog.dogInfo.height}</p>
+                    <p>Life Span: {dog.dogInfo.life}</p>
+                    <p>Group: {dog.dogInfo.breedGroup}</p>
+                    
+                </div>
+            </div>
+            <p className='dIDescription'>Description: {dog.description}</p>
         </div>
     </div>
   )
