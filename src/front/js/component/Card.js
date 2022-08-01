@@ -21,7 +21,7 @@ function Card({breed, id}) {
         </div>
 
         <div style={{margin:'1em'}}>
-          <Link to={"/pages/AboutCharacterPage/"}>
+          <Link to={`/pages/AboutCharacterPage/${breed.id}`}>
             <span className="-btn btn btn-primary"><i>Learn More</i></span>
 			</Link>
           <i 
