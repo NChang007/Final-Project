@@ -11,14 +11,14 @@ h1{
     /* display: flex; */
     
 }
-.title{
+.titleDogAboutPage{
     display: flex;
     justify-content: center;
 }
 .dIDescription{
 margin: 1rem;
 }
-.container{
+.containerInfoPage{
     display: flex;
     justify-content: center;
     align-items: center;
