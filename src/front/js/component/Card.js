@@ -12,7 +12,7 @@ function Card({breed, id}) {
         <img className="card-img-top" src={breed.image} alt="aCrd image cap"/>
 
         <div className="card-body">
-            <h5 className="card-title">{breed.breedName}</h5>
+            <h5 className="card-title"><strong>{breed.breedName}</strong></h5>
             <ul className='card-text'>
                 <li>Height : {breed.dogInfo.height}</li>
                 <li>Weight : {breed.dogInfo.weight}</li>
