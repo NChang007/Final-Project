@@ -25,7 +25,7 @@ function DogInfo() {
                     
                 </div>
             </div>
-            <p className='dIDescription'>Description: {dog.description}</p>
+            <p className='dIDescription'><strong>Description</strong>: {dog.description}</p>
         </div>
     </div>
   )
