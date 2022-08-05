@@ -144,6 +144,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				  )
 					.then((response) => response.json())
 					.then((data) => {
+						console.log(data);
 					  setStore({ favorites: data.favorites });
 					})
 					.catch((error) => {
@@ -179,6 +180,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					  console.log(error);
 					});
 				} else {
+					//if if doesnt exist we add it
 				  const opts = {
 					method: "POST",
 					headers: {
@@ -187,7 +189,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					},
 					body: JSON.stringify({
 					  "fave_id": idx,
-					  "item_type": type,
 					  "name": name,
 					}),
 				  };

@@ -38,9 +38,8 @@ def create_token():
 
       # create token
       expiration = datetime.timedelta(days=3)
-      access_token = create_access_token(identity=user.email, expires_delta=expiration)
+      access_token = create_access_token(identity=user.id, expires_delta=expiration)
 
-      access_token = create_access_token(identity=email)
       return jsonify(access_token=access_token)
 
     return jsonify(msg="wrong user")
@@ -80,23 +79,26 @@ def createUser():
 
 # get all favorites------------------------------------------------------------------------------------------------------
 @api.route('/favorites', methods=['GET'])
+@jwt_required()
 def getAllFavorites():
   # receive the token
   # get user id through token
-  favorites = getUserFavorite(User.id)
+  uid = get_jwt_identity()
+  favorites = Favorites.query.filter_by(user_id=uid)
   favorites = [favorite.serialize() for favorite in favorites]
+  print(favorites)
   return jsonify(favorites=favorites)
 
 #add a fave---------------------------------------------------------------------------------------------------------------
 @api.route('/addfavorites', methods=['POST'])
+@jwt_required()
 def addFavorite():
   request_body = request.get_json()
   print(request_body)
   favorite = Favorites(
     fave_id = request_body["fave_id"],
-    name = request_body[{breed.name}],
-    item_type = request_body["item_type"],
-    user_id = request_body["id"]
+    name = request_body["name"],
+    user_id = get_jwt_identity()
   )
 
   db.session.add(favorite)   
@@ -107,6 +109,7 @@ def addFavorite():
 
 # remove fav----------------------------------------------------------------------------------------------------
 @api.route('/deletefav/<int:id>', methods=['DELETE'])
+@jwt_required()
 def removeFav(id):
   Favorites.query.filter_by(id=id).delete()
   db.session.commit()
