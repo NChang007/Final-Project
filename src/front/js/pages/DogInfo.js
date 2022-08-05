@@ -17,11 +17,11 @@ function DogInfo() {
            <div className='titleDogAboutPage'><h1>{dog.breedName}</h1></div> 
             <div className='infoContainerImage'>
             <img src={dog.image} alt={dog.breedName}/>
-                <div>                  
-                    <p>Weight: {dog.dogInfo.weight}</p>
-                    <p>Height: {dog.dogInfo.height}</p>
-                    <p>Life Span: {dog.dogInfo.life}</p>
-                    <p>Group: {dog.dogInfo.breedGroup}</p>
+                <div className='dogDetails'>                  
+                    <p><strong>Weight:</strong> {dog.dogInfo.weight}</p>
+                    <p><strong>Height:</strong>: {dog.dogInfo.height}</p>
+                    <p><strong>Life Span:</strong> {dog.dogInfo.life}</p>
+                    <p><strong>Group:</strong>: {dog.dogInfo.breedGroup}</p>
                     
                 </div>
             </div>
