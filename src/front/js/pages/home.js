@@ -52,9 +52,9 @@ export const Home = () => {
 		 justifyContent: "center",
 		 alignItems: "center",
 		}}>
-			<div className="textUnderNav">
-				<h2 style={{color: '#616161 '}}>CHECK OUT THE DOG BREEDS</h2>
-				<input placeholder="Search dog breed" className="w-50 py-2" onChange={event => searchHash(event.target.value)}/>
+			<div className="divUNav">
+				
+				<input placeholder="Search dog breed" className="sBar w-50 py-2" onChange={event => searchHash(event.target.value)}/>
 			</div>
 			
 			

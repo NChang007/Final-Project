@@ -20,7 +20,7 @@ export const Navbar = () => {
 			</Link>
 
 			<Link to="/profile">
-				<i className="btn far fa-user fa-lg"></i>
+				<i className="btn far fa-user fa-2xl" style={{width: "50px", height: "36px", padding: "10px"}}></i>
 			</Link>
 			</div>
       	</div>

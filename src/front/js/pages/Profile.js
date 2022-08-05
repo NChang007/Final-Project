@@ -28,7 +28,8 @@ function Profile() {
     console.log(test);
   return (
     <div className="profileCont">
-        <div>
+        <div className="profileHeading">
+            <h2>FAVORITES</h2>
             { !store.token ?
                 <Link to="/login">
                     <button className="btn btn-primary">
@@ -43,8 +44,8 @@ function Profile() {
             }
         </div>
 
-        <div>
-            <h2>FAVORITES</h2>
+
+        <div className="row">
             { test.length > 0 &&
                 test.map((breed, idx) => {
                     return (

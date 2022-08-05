@@ -1,8 +1,10 @@
 /* 
     General Styles used on every website (Don't Repeat Yourself)
 */
+@import url('https://fonts.googleapis.com/css2?family=Belleza&family=Hurricane&display=swap');
+
 * {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Belleza', sans-serif;
   margin: 0%;
   padding: 0%;
 }
@@ -15,14 +17,29 @@
 .homeCont {
   background-color: #ffebee;
 }
-
-/* navbar------------------------------------------------------------------------------------ */
-.textUnderNav {
-  
+.divUNav {
+  width: 100%;
+  display: flex;
   justify-content: center;
   align-items: center;
-  color: #ff1744 ;
 }
+.sBar {
+  height: 4rem;
+  font-size: 40px;
+  color: rgb(230, 200, 144);
+  border-radius: 10px;
+  border: 2px solid #f7607e;
+  box-shadow: 0px 10px 25px #e57373;
+  margin-bottom: 1rem;
+}
+/* profile-------------------------------------------------------------------- */
+.profileHeading {
+  display: flex;
+
+}
+
+/* navbar------------------------------------------------------------------------------------ */
+
 .navbar > .container {
   width: 100%;
   display: flex;
@@ -291,7 +308,8 @@
   margin: 1rem;
 }
 .profileCont > div > h2 {
-  margin: 1rem;
+  margin-right: 48rem;
+  margin-left: 54rem;
   font-weight: 700;
   border-bottom: 1px solid;
 }
