@@ -20,7 +20,7 @@ function Profile() {
     let test = []
     store.favorites.forEach(f => {
         store.breeds.forEach((b, i) => {
-            if (f.fave_id == i) {
+            if (f.fave_id == b.id) {
                 test.push(b)
             }
         })
@@ -50,7 +50,7 @@ function Profile() {
                 test.map((breed, idx) => {
                     return (
                         <div className="col-3" key={idx}>
-                            <Card breed={breed} id={idx}/>
+                            <Card breed={breed} c={"favorite"}/>
                         </div>                            
                     )}
                 )  

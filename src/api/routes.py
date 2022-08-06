@@ -108,20 +108,20 @@ def addFavorite():
   return jsonify(favorites=favorites)
 
 # remove fav----------------------------------------------------------------------------------------------------
-@api.route('/deletefav/<int:id>', methods=['DELETE'])
+@api.route('/deletefav/<string:id>', methods=['DELETE'])
 @jwt_required()
 def removeFav(id):
-  Favorites.query.filter_by(id=id).delete()
+  Favorites.query.filter_by(fave_id=id).delete()
   db.session.commit()
   # return the updated list
-  favorites = getUserFavorite(1)
+  favorites = getUserFavorite(get_jwt_identity())
   favorites = [favorite.serialize() for favorite in favorites]
   return jsonify(favorites=favorites)
 
 def getUserFavorite(id):
   favorites = Favorites.query.all()
   if favorites is None:
-    return "This page does not exist"
+    return jsonify(msg="This page does not exist")
   else:
     f = []
     for fav in favorites: 

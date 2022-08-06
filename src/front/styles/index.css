@@ -69,6 +69,9 @@
 .card-title {
   font-size: xx-large;
 }
+.card-title::first-letter {
+  text-transform: uppercase;
+}
 /* btn--------------------------------------------------------------------------------------------------------- */
 .btn {
   background-color: #ff1744;
@@ -314,4 +317,7 @@
 .profileHeading {
   display: flex;
 
+}
+.favorite {
+  color: red;
 }

@@ -61,9 +61,10 @@ export const Home = () => {
 			
 			
 			{dogs.map((breed, idx) => {
+				let c = actions.checkFav(breed.id) ? "favorite" : ""
 				return (
 				<div className="col-3" key={idx}>
-					<Card breed={breed} id={idx}/>
+					<Card breed={breed} c={c}/>
 				</div>
 				);
 			})}	
