@@ -18,6 +18,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			  logout: () => {
 				const token = sessionStorage.removeItem("token");
 				setStore({ token: null });
+				//redirect here
 			  },
 			
 			//Login ---------------------------------------------------------------------------------------
@@ -154,8 +155,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
+			checkFav: (breedId) => {
+				let store = getStore();
+				if (!store.token) {
+					return false;
+				}
+				if (store.favorites.filter((f) => f.fave_id == breedId).length > 0) {
+					return true;
+				} else {return false}
+
+			},
+
 			handleFavorites: (idx, type, name) => {
 				let store = getStore();
+
+				if(!store.token) {
+					//redirect to login
+				}
 		
 				// if favorite exists - delete
 				if (store.favorites.filter((f) => f.fave_id == idx).length > 0) {
@@ -168,7 +184,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				  let f = store.favorites.filter((f) => f.fave_id == idx);
 				  fetch(
 					"https://3001-nchang007-finalproject-o8dy4ie9ail.ws-us59.gitpod.io/api/deletefav/" +
-					  f[0].id,
+					  f[0].fave_id,
 					opts
 				  )
 					.then((response) => response.json())

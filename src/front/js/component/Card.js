@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
  //anything in comment
 
-function Card({breed, id}) {
+function Card({breed, c}) {
   const { store, actions } = useContext(Context);
 
 
@@ -25,9 +25,9 @@ function Card({breed, id}) {
             <span className="-btn btn btn-primary"><i>Learn More</i></span>
 			</Link>
           <i 
-          className="far fa-lg fa-heart favBtn" 
+          className={"far fa-lg fa-heart favBtn " + c}
           style={{margin:'0rem 0rem 0rem 6rem'}}
-          onClick={() => actions.handleFavorites(id, "char", breed.breedName)}
+          onClick={() => actions.handleFavorites(breed.id, "char", breed.breedName)}
           ></i>
         </div>
         
