@@ -65,6 +65,10 @@
 /* card----------------------------------------------------------------- */
 .card {
   box-shadow: 0px 10px 25px #e57373;
+  border-radius: 15px;
+}
+.card-img-top {
+  border-radius: 15px 15px 0px 0px;
 }
 .card-title {
   font-size: xx-large;
