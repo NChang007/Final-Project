@@ -23,7 +23,7 @@ function Card({breed, c}) {
         <div style={{margin:'1em'}}>
           <Link to={`/pages/AboutCharacterPage/${breed.id}`}>
             <span className="-btn btn btn-primary"><i>Learn More</i></span>
-			</Link>
+			    </Link>
           <i 
           className={"far fa-lg fa-heart favBtn " + c}
           style={{margin:'0rem 0rem 0rem 6rem'}}

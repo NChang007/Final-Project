@@ -19,6 +19,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const token = sessionStorage.removeItem("token");
 				setStore({ token: null });
 				//redirect here
+				window.location.href ="https://3000-nchang007-finalproject-o8dy4ie9ail.ws-us59.gitpod.io/login"
 			  },
 			
 			//Login ---------------------------------------------------------------------------------------
@@ -171,6 +172,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				if(!store.token) {
 					//redirect to login
+					window.location.href ="https://3000-nchang007-finalproject-o8dy4ie9ail.ws-us59.gitpod.io/login"
 				}
 		
 				// if favorite exists - delete
