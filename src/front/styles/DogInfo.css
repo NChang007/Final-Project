@@ -9,7 +9,7 @@ h1{
     margin: 3rem;
     width: 70%;
     /* display: flex; */
-    
+    box-shadow: 0px 10px 25px #e57373;
 }
 .titleDogAboutPage{
     display: flex;
@@ -22,6 +22,7 @@ h1{
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
 
 .infoContainerImage{
@@ -30,7 +31,21 @@ h1{
     align-items: center;
 
 }
+.infoContainerImage > img{
+    border-radius: 15px;
+}
+
 .dogDetails{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
     margin: 1rem;
+    font-size: x-large;
+}
+.dogInfoTitle{
+    margin: 1rem;
+}
+.dogInfoTitle::first-letter{
+    text-transform: uppercase;
 }
    
