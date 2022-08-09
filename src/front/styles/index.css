@@ -325,3 +325,27 @@
 .favorite {
   color: red;
 }
+
+/* pagination */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+.page-link {
+  color: #ff1744;
+  animation: 3s;
+  font-size: medium;
+  border-color: #e4526f;
+
+}
+.page-link:hover {
+  animation: 3s;
+  font-size: large;
+  color: #e4526f;
+}
+.page-item.active .page-link{
+  background-color: #ffcdd2;
+  border-color: #e4526f;
+  color: #222;
+}

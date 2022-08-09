@@ -4,10 +4,22 @@ import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
 import Card from "../component/Card";
 import queryString from "query-string";
+import Pagination from "../component/Pagination";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
 	const [dogs, setDogs] = useState([]);
+
+	// User is currently on this page
+	const [currentPage, setCurrentPage] = useState(1);
+	// No of Records to be displayed on each page   
+	const [recordsPerPage] = useState(20);
+	const indexOfLastRecord = currentPage * recordsPerPage;
+	const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
+	// Records to be displayed on the current page
+	const currentRecords = dogs.slice(indexOfFirstRecord, indexOfLastRecord);
+	const nPages = Math.ceil(dogs.length / recordsPerPage)
+
 	useEffect(()=> {
 		searchHash("")
 	},[]);
@@ -54,13 +66,13 @@ export const Home = () => {
 		}}>
 			<div className="divUNav">
 				
-				<input placeholder="Search dog breed" className="sBar w-50 py-2" onChange={event => searchHash(event.target.value)}/>
+				<input placeholder=" Search dog breed" className="sBar w-50 py-2" onChange={event => searchHash(event.target.value)}/>
 			</div>
 			
 			
 			
 			
-			{dogs.map((breed, idx) => {
+			{currentRecords.map((breed, idx) => {
 				let c = actions.checkFav(breed.id) ? "favorite" : ""
 				return (
 				<div className="col-3" key={idx}>
@@ -68,6 +80,12 @@ export const Home = () => {
 				</div>
 				);
 			})}	
+
+			<Pagination
+				nPages = { nPages }
+				currentPage = { currentPage } 
+				setCurrentPage = { setCurrentPage }
+			/>
 		</div>
 	);
 };
