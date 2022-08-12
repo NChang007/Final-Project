@@ -66,7 +66,7 @@ export const Home = () => {
 		}}>
 			<div className="divUNav">
 				
-				<input placeholder=" Search dog breed" className="sBar w-50 py-2" onChange={event => searchHash(event.target.value)}/>
+				<input placeholder=" Search dog breed..." className="sBar w-50 py-2" onChange={event => searchHash(event.target.value)}/>
 			</div>
 			
 			
