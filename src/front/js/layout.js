@@ -31,9 +31,6 @@ const Layout = () => {
             <Route element={<Register />} path="/Register" />
             <Route element={<Quiz />} path="/Quiz"/>
             <Route element={<DogInfo />} path="/pages/AboutCharacterPage/:id"/>
-            {/* <Route element={<Demo />} path="/demo" /> */}
-            {/* <Route element={<Single />} path="/single/:theid" /> */}
-            {/* <Route element={<h1>Not found!</h1>} /> */}
           </Routes>
           {/* <Footer /> */}
         </ScrollToTop>

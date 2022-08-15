@@ -27,7 +27,9 @@ function Card({breed, c}) {
           <i 
           className={"far fa-lg fa-heart favBtn " + c}
           style={{margin:'0rem 0rem 0rem 6rem'}}
-          onClick={() => actions.handleFavorites(breed.id, "char", breed.breedName)}
+          onClick={(e) => { 
+            actions.handleFavorites(breed.id, "char", breed.breedName)
+          }}
           ></i>
         </div>
         
