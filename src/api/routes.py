@@ -94,17 +94,17 @@ def getAllFavorites():
 @jwt_required()
 def addFavorite():
   request_body = request.get_json()
-  print(request_body)
   favorite = Favorites(
     fave_id = request_body["fave_id"],
     name = request_body["name"],
     user_id = get_jwt_identity()
   )
-
+  uid = get_jwt_identity()
   db.session.add(favorite)   
   db.session.commit()
-  favorites = getUserFavorite({User.id})
-  favorites = [favorite.serialize() for favorite in favorites]
+  # get favorites for logged user
+  favorites = getUserFavorite(get_jwt_identity())
+  # return those favs - same happens in the delete function
   return jsonify(favorites=favorites)
 
 # remove fav----------------------------------------------------------------------------------------------------
@@ -115,16 +115,17 @@ def removeFav(id):
   db.session.commit()
   # return the updated list
   favorites = getUserFavorite(get_jwt_identity())
-  favorites = [favorite.serialize() for favorite in favorites]
   return jsonify(favorites=favorites)
 
 def getUserFavorite(id):
   favorites = Favorites.query.all()
+  favorites = [favorite.serialize() for favorite in favorites]
   if favorites is None:
     return jsonify(msg="This page does not exist")
   else:
+    # filter which users belong to the logged user
     f = []
     for fav in favorites: 
-      if fav.user_id == id:
+      if fav['user_id'] == id:
         f.append(fav)
     return f

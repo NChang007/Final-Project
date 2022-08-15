@@ -21,9 +21,10 @@ export const Home = () => {
 	const nPages = Math.ceil(dogs.length / recordsPerPage)
 
 	useEffect(()=> {
-		searchHash("")
+		
 	},[]);
 	useEffect(() => {
+		searchHash("")
 		const qs = queryString.parse(location.hash);
 		console.log("This is parsed info: ", qs);
 		searchFunction(qs.keyword);
@@ -38,6 +39,7 @@ export const Home = () => {
 				return item;
 			}
 		});
+		//setCurrentPage(1);
 		setDogs(filteredArray);
 	};
 
@@ -48,12 +50,6 @@ export const Home = () => {
 		}
 		location.hash = `keyword=${word}`;
 	};
-
-
-
-
-
-
 
 	return (
 		<div 
@@ -76,7 +72,7 @@ export const Home = () => {
 				let c = actions.checkFav(breed.id) ? "favorite" : ""
 				return (
 				<div className="col-3" key={idx}>
-					<Card breed={breed} c={c}/>
+					<Card breed={breed} c={c} search={searchHash}/>
 				</div>
 				);
 			})}	

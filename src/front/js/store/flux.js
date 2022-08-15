@@ -19,7 +19,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const token = sessionStorage.removeItem("token");
 				setStore({ token: null });
 				//redirect here
-				window.location.href ="https://3000-nchang007-finalproject-o8dy4ie9ail.ws-us59.gitpod.io/login"
+				window.location.href ="https://3000-nchang007-finalproject-o8dy4ie9ail.ws-us60.gitpod.io/login"
 			  },
 			
 			//Login ---------------------------------------------------------------------------------------
@@ -40,7 +40,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				};
 				try {
 				  const resp = await fetch(
-					"https://3001-nchang007-finalproject-o8dy4ie9ail.ws-us59.gitpod.io/api/login",
+					"https://3001-nchang007-finalproject-o8dy4ie9ail.ws-us60.gitpod.io/api/login",
 					opts
 				  );
 				  if (resp.status !== 200) {
@@ -83,6 +83,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 					// store.planets = data.results;
 					// setStore(store);
+					if (store.token) {
+						getActions().loadFavorites();
+					}
 					setStore({ breeds: data });
 				  })
 				  .catch((error) => {
@@ -110,7 +113,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				};
 				try {
 					const resp = await fetch(
-					  "https://3001-nchang007-finalproject-o8dy4ie9ail.ws-us59.gitpod.io/api/createUser",
+					  "https://3001-nchang007-finalproject-o8dy4ie9ail.ws-us60.gitpod.io/api/createUser",
 					  opts
 					);
 					if (resp.status !== 200) {
@@ -121,7 +124,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(data);
 					if (data.status == "true") {
 						//rederect to login
-						window.location.href ="https://3000-nchang007-finalproject-o8dy4ie9ail.ws-us59.gitpod.io/login"
+						window.location.href ="https://3000-nchang007-finalproject-o8dy4ie9ail.ws-us60.gitpod.io/login"
 					  } else {
 						setStore({ message: data.msg });
 					  }
@@ -141,7 +144,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					},
 				  };
 				  fetch(
-					"https://3001-nchang007-finalproject-o8dy4ie9ail.ws-us59.gitpod.io/api/favorites",
+					"https://3001-nchang007-finalproject-o8dy4ie9ail.ws-us60.gitpod.io/api/favorites",
 					opts
 				  )
 					.then((response) => response.json())
@@ -172,9 +175,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				if(!store.token) {
 					//redirect to login
-					window.location.href ="https://3000-nchang007-finalproject-o8dy4ie9ail.ws-us59.gitpod.io/login"
+					window.location.href ="https://3000-nchang007-finalproject-o8dy4ie9ail.ws-us60.gitpod.io/login"
 				}
-		
 				// if favorite exists - delete
 				if (store.favorites.filter((f) => f.fave_id == idx).length > 0) {
 				  const opts = {
@@ -185,13 +187,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 				  };
 				  let f = store.favorites.filter((f) => f.fave_id == idx);
 				  fetch(
-					"https://3001-nchang007-finalproject-o8dy4ie9ail.ws-us59.gitpod.io/api/deletefav/" +
+					"https://3001-nchang007-finalproject-o8dy4ie9ail.ws-us60.gitpod.io/api/deletefav/" +
 					  f[0].fave_id,
 					opts
 				  )
 					.then((response) => response.json())
 					.then((data) => {
-					  setStore({ favorites: data.favorites });
+					  setStore({ favorites: data.favorites, breeds : store.breeds });
 					})
 					.catch((error) => {
 					  //error handling
@@ -212,12 +214,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 				  };
 				  //add the new one
 				  fetch(
-					"https://3001-nchang007-finalproject-o8dy4ie9ail.ws-us59.gitpod.io/api/addfavorites",
+					"https://3001-nchang007-finalproject-o8dy4ie9ail.ws-us60.gitpod.io/api/addfavorites",
 					opts
 				  )
 					.then((response) => response.json())
 					.then((data) => {
-					  setStore({ favorites: data.favorites });
+						setStore({ favorites: data.favorites, breeds : store.breeds });
 					})
 					.catch((error) => {
 					  //error handling
